@@ -1,27 +1,48 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { loadUserData, saveUserData, UserData } from "@/lib/data";
+import Onboarding from "@/components/Onboarding";
+import BottomNav from "@/components/BottomNav";
+import Home from "@/pages/Home";
+import Connect from "@/pages/Connect";
+import Resources from "@/pages/Resources";
+import Journey from "@/pages/Journey";
 
-const queryClient = new QueryClient();
+const App = () => {
+  const [userData, setUserData] = useState<UserData>(loadUserData);
+  const [ready, setReady] = useState(userData.onboarded);
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  useEffect(() => {
+    saveUserData(userData);
+  }, [userData]);
+
+  const handleOnboardingComplete = (name: string) => {
+    const updated = { ...userData, name, onboarded: true };
+    setUserData(updated);
+    setReady(true);
+  };
+
+  if (!ready) {
+    return <Onboarding onComplete={handleOnboardingComplete} />;
+  }
+
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-background">
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/home" element={<Home userData={userData} setUserData={setUserData} />} />
+            <Route path="/connect" element={<Connect />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/journey" element={<Journey userData={userData} />} />
+            <Route path="*" element={<Navigate to="/home" replace />} />
+          </Routes>
+        </AnimatePresence>
+        <BottomNav />
+      </div>
+    </BrowserRouter>
+  );
+};
 
 export default App;

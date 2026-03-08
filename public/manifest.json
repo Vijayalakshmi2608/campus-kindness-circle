@@ -1,0 +1,16 @@
+{
+  "name": "CampusCare",
+  "short_name": "CampusCare",
+  "description": "Your private mental wellbeing companion for university life",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F4EF",
+  "theme_color": "#F7F4EF",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}
