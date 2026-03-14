@@ -1,7 +1,7 @@
 # 🧠 Campus Care Companion
 ### AI-Powered Mental Wellness Companion for Students
 
-![Campus Care Banner](assets/banner.png)
+![Campus Care Banner](banner.png)
 
 ![Hackathon](https://img.shields.io/badge/Hackathon-Innovation%20Project-blue)
 ![AI Powered](https://img.shields.io/badge/AI-Powered-teal)
