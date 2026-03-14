@@ -1,73 +1,278 @@
-# Welcome to your Lovable project
+# 🧠 Campus Care Companion
+### AI-Powered Mental Wellness Companion for Students
 
-## Project info
+![Campus Care Banner](assets/banner.png)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+![Hackathon](https://img.shields.io/badge/Hackathon-Innovation%20Project-blue)
+![AI Powered](https://img.shields.io/badge/AI-Powered-teal)
+![Status](https://img.shields.io/badge/Project-Prototype-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen)
 
-## How can I edit this code?
+> Detect burnout early. Support students daily. Build healthier campuses.
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+# 🌍 Overview
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+**Campus Care Companion** is an AI-powered mental wellness platform designed to help students monitor their emotional wellbeing and detect burnout early.
 
-Changes made via Lovable will be committed automatically to this repo.
+Students complete a **60-second daily check-in**, allowing the AI system to analyze patterns and provide supportive coping strategies before burnout escalates.
 
-**Use your preferred IDE**
+Universities gain **anonymous wellness insights** that help identify stress trends across campus while protecting individual privacy.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+# 🎯 The Problem
 
-Follow these steps:
+Student mental health is a growing global concern.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- 📊 **1 in 3 students experience burnout**
+- 😞 Many avoid seeking help due to stigma
+- 🧑‍⚕️ Counseling centers are overwhelmed
+- ⚠️ Issues are often detected too late
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Traditional support systems rely on **students asking for help first**.
 
-# Step 3: Install the necessary dependencies.
-npm i
+Campus Care Companion enables **proactive mental wellness support**.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+---
+
+# 💡 Our Solution
+
+Campus Care Companion provides:
+
+✅ Daily wellness check-ins  
+✅ AI burnout risk analysis  
+✅ Personalized coping strategies  
+✅ Emotional trend visualization  
+✅ Anonymous campus wellness insights
+
+All in a **privacy-first system designed for students.**
+
+---
+
+# ✨ Key Features
+
+## 🧠 AI Burnout Risk Detection
+AI analyzes emotional and behavioral patterns to estimate burnout risk.
+
+---
+
+## 📊 Mood Heatmap Tracking
+Students visualize emotional trends over time.
+
+---
+
+## 💬 AI Wellness Companion
+Supportive AI provides personalized mental wellness guidance.
+
+---
+
+## ⏱ 60-Second Daily Check-in
+Students record:
+
+- Mood
+- Energy level
+- Sleep quality
+- Optional reflections
+
+---
+
+## 🧘 Micro Recovery Suggestions
+AI recommends quick recovery actions such as:
+
+- Breathing exercises
+- Short walks
+- Journaling prompts
+- Focus resets
+
+---
+
+## 🏫 Institutional Wellness Dashboard
+Universities receive **anonymous aggregated insights** including:
+
+- Campus stress trends
+- Department burnout signals
+- Wellness improvement tracking
+
+---
+
+# 🎥 Demo
+
+## 🚀 Live Demo Flow
+
+![Demo GIF](assets/demo.gif)
+
+Demo Steps:
+
+1. Start wellness check-in
+2. Submit daily mood data
+3. AI analyzes burnout risk
+4. View personalized insights
+5. Explore wellness dashboard
+
+---
+
+# 📸 Screenshots
+
+## Landing Page
+![Landing Page](assets/landing.png)
+
+---
+
+## Daily Check-in
+![Checkin](assets/checkin.png)
+
+---
+
+## AI Burnout Insights
+![Insights](assets/insights.png)
+
+---
+
+## Personal Wellness Dashboard
+![Dashboard](assets/dashboard.png)
+
+---
+
+## Organization Analytics Dashboard
+![Org Dashboard](assets/org-dashboard.png)
+
+---
+
+# ⚙️ System Architecture
+Student Check-in
+↓
+Behavioral Data Collection
+↓
+AI Pattern Analysis
+↓
+Burnout Risk Prediction
+↓
+Personalized Coping Strategies
+↓
+Anonymous Campus Insights
+
+
+---
+
+# 🧠 AI Engine
+
+The AI assistant analyzes signals such as:
+
+- Mood trends
+- Energy fluctuations
+- Sleep quality
+- Stress text sentiment
+
+Output:
+
+- Burnout Risk Score
+- Wellness Trend Insights
+- Personalized Recovery Suggestions
+
+⚠️ The AI system **does not provide medical diagnosis.**
+
+---
+
+# 🔐 Privacy First Design
+
+Campus Care Companion ensures:
+
+🔒 Personal data remains private  
+🔒 Institutional dashboards are fully anonymous  
+🔒 No student identity is shared  
+🔒 Users control their data
+
+Privacy is a **core design principle**.
+
+---
+
+# 🖥 Tech Stack
+
+### Frontend
+- React
+- TailwindCSS
+- Framer Motion
+- Recharts
+
+### Backend
+- Node.js / API Services
+- AI analysis engine
+
+### AI Integration
+- Behavioral pattern analysis
+- Wellness recommendation system
+
+---
+
+## 📂 Project Structure
+```
+campus-care-companion/
+│
+├── assets/
+│   ├── banner.png
+│   ├── demo.gif
+│   ├── landing.png
+│   ├── dashboard.png
+│   └── insights.png
+│
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── charts/
+│   └── ai-engine/
+│
+├── public/
+│
+└── README.md
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+# 🚀 Future Improvements
 
-**Use GitHub Codespaces**
+Upcoming enhancements:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- Predictive burnout forecasting
+- Mobile app version
+- Counselor integration
+- Advanced AI behavioral modeling
+- Cross-campus wellness benchmarking
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+# 🌟 Impact
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Campus Care Companion helps universities:
 
-## How can I deploy this project?
+- Detect burnout early
+- Encourage daily mental awareness
+- Reduce severe student mental health crises
+- Improve campus wellbeing
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Even **60 seconds a day can make a difference.**
 
-## Can I connect a custom domain to my Lovable project?
+---
 
-Yes, you can!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+# 🏆 Why This Project Matters
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Mental health support should not begin only when students reach a crisis.
+
+Campus Care Companion enables **early awareness, daily support, and healthier campuses.**
+
+> Because every student deserves peace of mind.
+
+---
+
+# ⭐ Support the Project
+
+If you found this project meaningful:
+
+⭐ Star this repository  
+🤝 Share feedback  
+🚀 Contribute ideas
+
+Together we can build healthier campuses.
