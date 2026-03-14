@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PageWrapper from "@/components/PageWrapper";
+import ScrollReveal from "@/components/ScrollReveal";
 import {
   MOODS,
   CAMPUS_STATS,
@@ -133,7 +134,6 @@ export default function Home({ userData, setUserData }: Props) {
                   {CAMPUS_STATS.totalCheckins} students checked in today
                 </div>
 
-                {/* Campus pulse bar */}
                 <div className="mb-2">
                   <p className="text-xs font-body text-muted-foreground mb-1.5">Your campus today</p>
                   <div className="flex h-3 rounded-pill overflow-hidden">
@@ -160,50 +160,33 @@ export default function Home({ userData, setUserData }: Props) {
           </AnimatePresence>
         </motion.div>
 
-        {/* Suggestion cards */}
+        {/* Suggestion cards with scroll reveal */}
         {submitted && (
           <motion.div variants={fadeUp}>
             <h3 className="font-heading text-base mb-3">Based on your check-in</h3>
             <div className="space-y-3">
               {(selected ?? todayMood?.score ?? 3) <= 2 ? (
                 <>
-                  <SuggestionCard
-                    emoji="💬"
-                    title="Talk to a Peer Listener"
-                    desc="Anonymous, trained student support — usually matched in under 2 min."
-                    color="bg-accent-2/10"
-                  />
-                  <SuggestionCard
-                    emoji="🫁"
-                    title="Try Box Breathing"
-                    desc="A 2-minute exercise to calm your nervous system."
-                    color="bg-secondary/20"
-                  />
+                  <ScrollReveal delay={0}>
+                    <SuggestionCard emoji="💬" title="Talk to a Peer Listener" desc="Anonymous, trained student support — usually matched in under 2 min." color="bg-accent-2/10" />
+                  </ScrollReveal>
+                  <ScrollReveal delay={0.1}>
+                    <SuggestionCard emoji="🫁" title="Try Box Breathing" desc="A 2-minute exercise to calm your nervous system." color="bg-secondary/20" />
+                  </ScrollReveal>
                 </>
               ) : (selected ?? todayMood?.score ?? 3) <= 4 ? (
                 <>
-                  <SuggestionCard
-                    emoji="🙏"
-                    title="Gratitude Prompt"
-                    desc="Name one thing you're grateful for today."
-                    color="bg-accent/10"
-                  />
-                  <SuggestionCard
-                    emoji="🎉"
-                    title="Campus Events This Week"
-                    desc="Movie night, open mic, and more — fight isolation with connection."
-                    color="bg-secondary/20"
-                  />
+                  <ScrollReveal delay={0}>
+                    <SuggestionCard emoji="🙏" title="Gratitude Prompt" desc="Name one thing you're grateful for today." color="bg-accent/10" />
+                  </ScrollReveal>
+                  <ScrollReveal delay={0.1}>
+                    <SuggestionCard emoji="🎉" title="Campus Events This Week" desc="Movie night, open mic, and more — fight isolation with connection." color="bg-secondary/20" />
+                  </ScrollReveal>
                 </>
               ) : (
-                <>
-                  <SuggestionCard
-                    emoji="🤝"
-                    title="Pay It Forward"
-                    desc="You're doing great — consider becoming a peer listener to help others."
-                    color="bg-accent-2/10"
-                  />
-                </>
+                <ScrollReveal>
+                  <SuggestionCard emoji="🤝" title="Pay It Forward" desc="You're doing great — consider becoming a peer listener to help others." color="bg-accent-2/10" />
+                </ScrollReveal>
               )}
             </div>
           </motion.div>
@@ -225,16 +208,12 @@ function SuggestionCard({
   color: string;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={`card-neu p-4 flex gap-3 items-start ${color}`}
-    >
+    <div className={`card-neu p-4 flex gap-3 items-start ${color}`}>
       <span className="text-2xl mt-0.5">{emoji}</span>
       <div>
         <p className="font-body font-medium text-sm">{title}</p>
         <p className="text-muted-foreground text-xs font-body mt-0.5">{desc}</p>
       </div>
-    </motion.div>
+    </div>
   );
 }

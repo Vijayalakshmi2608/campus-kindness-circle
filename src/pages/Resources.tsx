@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PageWrapper from "@/components/PageWrapper";
+import ScrollReveal from "@/components/ScrollReveal";
 import BreathingExercise from "@/components/BreathingExercise";
 import GroundingExercise from "@/components/GroundingExercise";
 import { Search, Phone, MapPin, ExternalLink } from "lucide-react";
@@ -47,7 +48,6 @@ export default function Resources() {
         <motion.div variants={stagger} initial="hidden" animate="show">
           <motion.div variants={fadeUp}>
             <h1 className="text-[28px] font-heading leading-tight mb-4">Resources</h1>
-            {/* Search */}
             <div className="relative mb-4">
               <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input
@@ -57,7 +57,6 @@ export default function Resources() {
                 className="w-full pl-10 pr-4 py-3 rounded-pill bg-card text-sm font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/20 shadow-soft"
               />
             </div>
-            {/* Filters */}
             <div className="flex gap-2 overflow-x-auto pb-2 mb-6 no-scrollbar">
               {filters.map((f) => (
                 <button
@@ -70,7 +69,6 @@ export default function Resources() {
             </div>
           </motion.div>
 
-          {/* Quick actions */}
           <motion.div variants={fadeUp}>
             <h3 className="font-heading text-base mb-3">Right Now (Under 5 Minutes)</h3>
             <div className="grid grid-cols-3 gap-3 mb-6">
@@ -80,8 +78,7 @@ export default function Resources() {
             </div>
           </motion.div>
 
-          {/* Campus support */}
-          <motion.div variants={fadeUp}>
+          <ScrollReveal>
             <h3 className="font-heading text-base mb-3">Campus Support (Official)</h3>
             <div className="space-y-3 mb-6">
               <ServiceCard
@@ -113,16 +110,16 @@ export default function Resources() {
                 buttons={[{ label: "Learn More", icon: <ExternalLink size={12} /> }]}
               />
             </div>
-          </motion.div>
+          </ScrollReveal>
 
-          {/* Learn */}
-          <motion.div variants={fadeUp}>
+          <ScrollReveal delay={0.1}>
             <h3 className="font-heading text-base mb-3">Learn & Understand</h3>
             <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
               {articles.map((a) => (
-                <div
+                <motion.div
                   key={a.title}
-                  className="flex-shrink-0 w-52 card-neu p-4"
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  className="flex-shrink-0 w-52 card-neu p-4 cursor-pointer"
                 >
                   <div className="w-full h-20 rounded-lg bg-gradient-to-br from-secondary/30 to-accent-2/20 mb-3" />
                   <p className="font-body font-medium text-sm leading-snug mb-1">{a.title}</p>
@@ -130,10 +127,10 @@ export default function Resources() {
                     <span className="text-[10px] font-mono text-muted-foreground">{a.time}</span>
                     <span className="px-2 py-0.5 rounded-pill bg-surface-2 text-[10px] font-body">{a.tag}</span>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </motion.div>
+          </ScrollReveal>
         </motion.div>
       </PageWrapper>
     </>
@@ -144,6 +141,7 @@ function QuickCard({ emoji, label, onClick }: { emoji: string; label: string; on
   return (
     <motion.button
       whileTap={{ scale: 0.95 }}
+      whileHover={{ y: -3 }}
       onClick={onClick}
       className="card-neu p-3 flex flex-col items-center gap-2 text-center"
     >

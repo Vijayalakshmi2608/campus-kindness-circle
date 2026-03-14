@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import PageWrapper from "@/components/PageWrapper";
+import ScrollReveal from "@/components/ScrollReveal";
 import MoodChart from "@/components/MoodChart";
 import { UserData, ALL_BADGES, getLast7Days, getDayLabels, MOODS } from "@/lib/data";
 import { Lock } from "lucide-react";
@@ -21,7 +22,6 @@ export default function Journey({ userData }: Props) {
     show: { transition: { staggerChildren: 0.08 } },
   };
 
-  // Generate insights
   const insights: string[] = [];
   const bestDays = last7
     .map((e, i) => (e ? { score: e.score, day: dayLabels[i] } : null))
@@ -46,11 +46,8 @@ export default function Journey({ userData }: Props) {
           <h1 className="text-[28px] font-heading leading-tight mb-4">My Journey</h1>
         </motion.div>
 
-        {/* Summary card */}
         <motion.div variants={fadeUp} className="card-neu p-5 mb-6">
           <p className="font-body text-sm text-muted-foreground mb-3">Your wellbeing over time</p>
-
-          {/* Emoji streak */}
           <div className="flex justify-between mb-3">
             {last7.map((entry, i) => {
               const mood = entry ? MOODS.find((m) => m.score === entry.score) : null;
@@ -64,7 +61,6 @@ export default function Journey({ userData }: Props) {
               );
             })}
           </div>
-
           <div className="flex items-center gap-2">
             <span className="text-sm">🔥</span>
             <span className="font-body text-sm font-medium">{userData.streak} day streak</span>
@@ -74,30 +70,29 @@ export default function Journey({ userData }: Props) {
           </p>
         </motion.div>
 
-        {/* Mood chart */}
-        <motion.div variants={fadeUp} className="card-neu p-5 mb-6">
-          <p className="font-body text-sm text-muted-foreground mb-3">Mood over 7 days</p>
-          <MoodChart data={last7} labels={dayLabels} />
-        </motion.div>
+        <ScrollReveal>
+          <div className="card-neu p-5 mb-6">
+            <p className="font-body text-sm text-muted-foreground mb-3">Mood over 7 days</p>
+            <MoodChart data={last7} labels={dayLabels} />
+          </div>
+        </ScrollReveal>
 
-        {/* Insights */}
         {insights.length > 0 && (
-          <motion.div variants={fadeUp} className="mb-6">
+          <ScrollReveal delay={0.05}>
             <h3 className="font-heading text-base mb-3">Insights</h3>
-            <div className="space-y-2">
+            <div className="space-y-2 mb-6">
               {insights.map((text, i) => (
                 <div key={i} className="card-neu p-4">
                   <p className="font-body text-sm">{text}</p>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </ScrollReveal>
         )}
 
-        {/* Badges */}
-        <motion.div variants={fadeUp} className="mb-6">
+        <ScrollReveal delay={0.1}>
           <h3 className="font-heading text-base mb-3">Your Milestones</h3>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-4 gap-3 mb-6">
             {ALL_BADGES.map((badge) => {
               const earned = userData.badges.includes(badge.id);
               return (
@@ -122,9 +117,8 @@ export default function Journey({ userData }: Props) {
               );
             })}
           </div>
-        </motion.div>
+        </ScrollReveal>
 
-        {/* Privacy note */}
         <motion.div variants={fadeUp} className="text-center mb-4">
           <p className="text-[11px] text-muted-foreground font-body">
             🔒 Your personal mood data is stored only on this device. Only anonymous, aggregated data is shared with your campus.
