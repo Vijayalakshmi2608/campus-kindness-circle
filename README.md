@@ -117,27 +117,23 @@ Demo Steps:
 # 📸 Screenshots
 
 ## Landing Page
-![Landing Page](assets/landing.png)
+![Landing Page](landing.png)
 
----
-
-## Daily Check-in
-![Checkin](assets/checkin.png)
 
 ---
 
 ## AI Burnout Insights
-![Insights](assets/insights.png)
+![Insights](insights.png)
 
 ---
 
 ## Personal Wellness Dashboard
-![Dashboard](assets/dashboard.png)
+![Dashboard](dashboard.png)
 
 ---
 
 ## Organization Analytics Dashboard
-![Org Dashboard](assets/org-dashboard.png)
+![Org Dashboard](dashboard.png)
 
 ---
 
