@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 import PageWrapper from "@/components/PageWrapper";
 import { CAMPUS_STATS } from "@/lib/data";
 import { Send, Shield } from "lucide-react";
@@ -26,7 +27,12 @@ export default function Connect() {
     setTimeout(() => setMatchStep(1), 2000);
     setTimeout(() => {
       setMatchStep(2);
-      setTimeout(() => setState("chatting"), 800);
+      setTimeout(() => {
+        setState("chatting");
+        toast.success("Connected with Jamie 🎓", {
+          description: "Your conversation is fully anonymous and encrypted.",
+        });
+      }, 800);
     }, 3500);
   };
 
@@ -34,7 +40,6 @@ export default function Connect() {
     if (!input.trim()) return;
     setMessages((prev) => [...prev, { text: input.trim(), fromMe: true }]);
     setInput("");
-    // Simulate response
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
@@ -66,7 +71,6 @@ export default function Connect() {
             className="flex flex-col"
             style={{ minHeight: "calc(100vh - 160px)" }}
           >
-            {/* Chat header */}
             <div className="flex items-center gap-2 mb-4 pb-3 border-b border-border">
               <div className="w-9 h-9 rounded-full bg-accent-2/20 flex items-center justify-center font-body font-medium text-sm text-accent-2">
                 J
@@ -80,13 +84,13 @@ export default function Connect() {
               </div>
             </div>
 
-            {/* Messages */}
             <div className="flex-1 space-y-3 overflow-y-auto mb-4">
               {messages.map((msg, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   className={`flex ${msg.fromMe ? "justify-end" : "justify-start"}`}
                 >
                   <div
@@ -102,7 +106,6 @@ export default function Connect() {
               ))}
             </div>
 
-            {/* Input */}
             <div className="flex gap-2">
               <input
                 value={input}
@@ -112,7 +115,7 @@ export default function Connect() {
                 className="flex-1 px-4 py-3 rounded-pill bg-card text-sm font-body placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/20 shadow-soft"
               />
               <motion.button
-                whileTap={{ scale: 0.9 }}
+                whileTap={{ scale: 0.85 }}
                 onClick={sendMessage}
                 className="w-11 h-11 rounded-full bg-primary text-primary-foreground flex items-center justify-center"
               >
@@ -135,7 +138,6 @@ export default function Connect() {
               </div>
             </motion.div>
 
-            {/* Main CTA card */}
             <motion.div variants={fadeUp} className="card-neu p-5 mb-6 border-l-4 border-accent-2">
               <AnimatePresence mode="wait">
                 {state === "idle" ? (
@@ -149,7 +151,8 @@ export default function Connect() {
                       <span className="px-3 py-1 rounded-pill bg-surface-2 text-xs font-body">🔒 Fully anonymous</span>
                     </div>
                     <motion.button
-                      whileTap={{ scale: 0.97 }}
+                      whileTap={{ scale: 0.94 }}
+                      whileHover={{ scale: 1.01 }}
                       onClick={startMatching}
                       className="w-full py-3.5 rounded-pill bg-primary text-primary-foreground font-body font-medium"
                     >
@@ -183,7 +186,6 @@ export default function Connect() {
               </AnimatePresence>
             </motion.div>
 
-            {/* Other ways */}
             <motion.div variants={fadeUp}>
               <h3 className="font-heading text-base mb-3">Other ways to connect</h3>
               <div className="space-y-3">
@@ -201,12 +203,15 @@ export default function Connect() {
 
 function ConnectCard({ emoji, title, desc }: { emoji: string; title: string; desc: string }) {
   return (
-    <div className="card-neu p-4 flex gap-3 items-start">
+    <motion.div
+      whileTap={{ scale: 0.97 }}
+      className="card-neu p-4 flex gap-3 items-start ripple-container cursor-pointer"
+    >
       <span className="text-2xl">{emoji}</span>
       <div>
         <p className="font-body font-medium text-sm">{title}</p>
         <p className="text-muted-foreground text-xs font-body mt-0.5">{desc}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }

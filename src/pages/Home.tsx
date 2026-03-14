@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 import PageWrapper from "@/components/PageWrapper";
 import ScrollReveal from "@/components/ScrollReveal";
 import {
@@ -45,6 +46,10 @@ export default function Home({ userData, setUserData }: Props) {
     const updated = recordMood(userData, selected, note || undefined);
     setUserData(updated);
     setSubmitted(true);
+    const mood = MOODS.find(m => m.score === selected);
+    toast.success(`Checked in as ${mood?.emoji} ${mood?.label}`, {
+      description: "Your daily pulse has been recorded.",
+    });
   };
 
   const stagger = {
@@ -79,7 +84,7 @@ export default function Home({ userData, setUserData }: Props) {
                   {MOODS.map((m) => (
                     <motion.button
                       key={m.score}
-                      whileTap={{ scale: 0.95 }}
+                      whileTap={{ scale: 0.9 }}
                       animate={{
                         scale: selected === m.score ? 1.1 : 1,
                         backgroundColor:
@@ -112,7 +117,8 @@ export default function Home({ userData, setUserData }: Props) {
                 />
 
                 <motion.button
-                  whileTap={{ scale: 0.97 }}
+                  whileTap={{ scale: 0.94 }}
+                  whileHover={{ scale: 1.01 }}
                   onClick={handleSubmit}
                   disabled={!selected}
                   className="w-full py-3.5 rounded-pill bg-accent text-accent-foreground font-body font-medium disabled:opacity-30 transition-opacity"
@@ -160,7 +166,6 @@ export default function Home({ userData, setUserData }: Props) {
           </AnimatePresence>
         </motion.div>
 
-        {/* Suggestion cards with scroll reveal */}
         {submitted && (
           <motion.div variants={fadeUp}>
             <h3 className="font-heading text-base mb-3">Based on your check-in</h3>
@@ -208,12 +213,15 @@ function SuggestionCard({
   color: string;
 }) {
   return (
-    <div className={`card-neu p-4 flex gap-3 items-start ${color}`}>
+    <motion.div
+      whileTap={{ scale: 0.97 }}
+      className={`card-neu p-4 flex gap-3 items-start ripple-container cursor-pointer ${color}`}
+    >
       <span className="text-2xl mt-0.5">{emoji}</span>
       <div>
         <p className="font-body font-medium text-sm">{title}</p>
         <p className="text-muted-foreground text-xs font-body mt-0.5">{desc}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }

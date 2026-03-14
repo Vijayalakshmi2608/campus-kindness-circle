@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 import PageWrapper from "@/components/PageWrapper";
 import ScrollReveal from "@/components/ScrollReveal";
 import BreathingExercise from "@/components/BreathingExercise";
@@ -37,6 +38,20 @@ export default function Resources() {
     show: { transition: { staggerChildren: 0.06 } },
   };
 
+  const handleBreathingOpen = () => {
+    setOverlay("breathing");
+    toast("🫁 Starting Box Breathing", { description: "Find a comfortable position and follow along." });
+  };
+
+  const handleGroundingOpen = () => {
+    setOverlay("grounding");
+    toast("🧊 Starting 5-4-3-2-1 Grounding", { description: "Use your senses to ground yourself." });
+  };
+
+  const handleServiceAction = (label: string) => {
+    toast.info(`Opening ${label}...`, { description: "This would link to your campus service." });
+  };
+
   return (
     <>
       <AnimatePresence>
@@ -59,12 +74,13 @@ export default function Resources() {
             </div>
             <div className="flex gap-2 overflow-x-auto pb-2 mb-6 no-scrollbar">
               {filters.map((f) => (
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.93 }}
                   key={f.label}
                   className="flex-shrink-0 px-3 py-1.5 rounded-pill bg-surface-2 text-xs font-body flex items-center gap-1 hover:bg-primary/10 transition-colors"
                 >
                   <span>{f.emoji}</span> {f.label}
-                </button>
+                </motion.button>
               ))}
             </div>
           </motion.div>
@@ -72,9 +88,9 @@ export default function Resources() {
           <motion.div variants={fadeUp}>
             <h3 className="font-heading text-base mb-3">Right Now (Under 5 Minutes)</h3>
             <div className="grid grid-cols-3 gap-3 mb-6">
-              <QuickCard emoji="🫁" label="Box Breathing" onClick={() => setOverlay("breathing")} />
-              <QuickCard emoji="🧊" label="5-4-3-2-1 Grounding" onClick={() => setOverlay("grounding")} />
-              <QuickCard emoji="✍️" label="Dump It Out" onClick={() => {}} />
+              <QuickCard emoji="🫁" label="Box Breathing" onClick={handleBreathingOpen} />
+              <QuickCard emoji="🧊" label="5-4-3-2-1 Grounding" onClick={handleGroundingOpen} />
+              <QuickCard emoji="✍️" label="Dump It Out" onClick={() => toast("✍️ Journal opened", { description: "Write freely — nothing is stored." })} />
             </div>
           </motion.div>
 
@@ -86,28 +102,28 @@ export default function Resources() {
                 title="Student Health Center"
                 detail="Mon–Fri 8am–6pm · Room 204, Main Building"
                 buttons={[
-                  { label: "Get Directions", icon: <MapPin size={12} /> },
-                  { label: "Call Now", icon: <Phone size={12} /> },
+                  { label: "Get Directions", icon: <MapPin size={12} />, onClick: () => handleServiceAction("Directions") },
+                  { label: "Call Now", icon: <Phone size={12} />, onClick: () => handleServiceAction("Phone") },
                 ]}
               />
               <ServiceCard
                 emoji="🧠"
                 title="Counseling Services"
                 detail="Free for enrolled students · Book online"
-                buttons={[{ label: "Book Appointment", icon: <ExternalLink size={12} /> }]}
+                buttons={[{ label: "Book Appointment", icon: <ExternalLink size={12} />, onClick: () => handleServiceAction("Booking") }]}
               />
               <ServiceCard
                 emoji="🆘"
                 title="Crisis Line"
                 detail="24/7 · Free · Confidential"
-                buttons={[{ label: "Call Now", icon: <Phone size={12} /> }]}
+                buttons={[{ label: "Call Now", icon: <Phone size={12} />, onClick: () => handleServiceAction("Crisis Line") }]}
                 urgent
               />
               <ServiceCard
                 emoji="💰"
                 title="Financial Aid Emergency Fund"
                 detail="Same-day assistance available"
-                buttons={[{ label: "Learn More", icon: <ExternalLink size={12} /> }]}
+                buttons={[{ label: "Learn More", icon: <ExternalLink size={12} />, onClick: () => handleServiceAction("Financial Aid") }]}
               />
             </div>
           </ScrollReveal>
@@ -118,8 +134,9 @@ export default function Resources() {
               {articles.map((a) => (
                 <motion.div
                   key={a.title}
+                  whileTap={{ scale: 0.96 }}
                   whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                  className="flex-shrink-0 w-52 card-neu p-4 cursor-pointer"
+                  className="flex-shrink-0 w-52 card-neu p-4 cursor-pointer ripple-container"
                 >
                   <div className="w-full h-20 rounded-lg bg-gradient-to-br from-secondary/30 to-accent-2/20 mb-3" />
                   <p className="font-body font-medium text-sm leading-snug mb-1">{a.title}</p>
@@ -140,10 +157,10 @@ export default function Resources() {
 function QuickCard({ emoji, label, onClick }: { emoji: string; label: string; onClick: () => void }) {
   return (
     <motion.button
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.9 }}
       whileHover={{ y: -3 }}
       onClick={onClick}
-      className="card-neu p-3 flex flex-col items-center gap-2 text-center"
+      className="card-neu p-3 flex flex-col items-center gap-2 text-center ripple-container"
     >
       <span className="text-2xl">{emoji}</span>
       <span className="text-[11px] font-body font-medium leading-tight">{label}</span>
@@ -161,7 +178,7 @@ function ServiceCard({
   emoji: string;
   title: string;
   detail: string;
-  buttons: { label: string; icon: React.ReactNode }[];
+  buttons: { label: string; icon: React.ReactNode; onClick: () => void }[];
   urgent?: boolean;
 }) {
   return (
@@ -175,8 +192,10 @@ function ServiceCard({
       </div>
       <div className="flex gap-2">
         {buttons.map((b) => (
-          <button
+          <motion.button
+            whileTap={{ scale: 0.93 }}
             key={b.label}
+            onClick={b.onClick}
             className={`flex items-center gap-1.5 px-3 py-2 rounded-pill text-xs font-body font-medium ${
               urgent
                 ? "bg-warning text-warning-foreground"
@@ -185,7 +204,7 @@ function ServiceCard({
           >
             {b.icon}
             {b.label}
-          </button>
+          </motion.button>
         ))}
       </div>
     </div>
