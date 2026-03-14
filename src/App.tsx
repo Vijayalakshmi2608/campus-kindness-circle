@@ -6,6 +6,7 @@ import Onboarding from "@/components/Onboarding";
 import BottomNav from "@/components/BottomNav";
 import AnimatedRoute from "@/components/AnimatedRoute";
 import ParallaxBlobs from "@/components/ParallaxBlobs";
+import { Toaster } from "@/components/ui/sonner";
 import Home from "@/pages/Home";
 import Connect from "@/pages/Connect";
 import Resources from "@/pages/Resources";
@@ -44,7 +45,12 @@ const App = () => {
   };
 
   if (!ready) {
-    return <Onboarding onComplete={handleOnboardingComplete} />;
+    return (
+      <>
+        <Onboarding onComplete={handleOnboardingComplete} />
+        <Toaster />
+      </>
+    );
   }
 
   return (
@@ -56,6 +62,7 @@ const App = () => {
         </div>
         <BottomNav />
       </div>
+      <Toaster />
     </BrowserRouter>
   );
 };
