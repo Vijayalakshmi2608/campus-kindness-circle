@@ -128,12 +128,12 @@ Demo Steps:
 ---
 
 ## Personal Wellness Dashboard
-![Dashboard](dashboard.png)
+![Dashboard](dashboard1.png)
 
 ---
 
-## Organization Analytics Dashboard
-![Org Dashboard](dashboard.png)
+## Chat with Mentors 
+![Org Dashboard](dashboard2.png)
 
 ---
 
